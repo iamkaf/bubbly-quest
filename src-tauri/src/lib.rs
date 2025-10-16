@@ -6,8 +6,9 @@ fn greet(name: &str) -> String {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    let mut builder =
-        tauri::Builder::default().plugin(tauri_plugin_window_state::Builder::new().build());
+    let mut builder = tauri::Builder::default()
+        .plugin(tauri_plugin_fs::init())
+        .plugin(tauri_plugin_window_state::Builder::new().build());
 
     // The single instance plugin only works on desktop platforms
     #[cfg(desktop)]

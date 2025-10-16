@@ -52,16 +52,23 @@ Zustand was chosen for its simplicity, performance, and minimal boilerplate, all
 * **Game Engine Logic:** Manages all rules of the game, including player movement, combat calculations, and inventory management.
 * **State Management:** Uses Zustand to hold the complete, current state of the game session in memory (e.g., player stats, location, inventory).
 * **Command Parser:** Implements a powerful, custom command parser that handles complex natural language inputs with synonyms, direction aliases, and context-aware actions.
-* **Data Handling:** Parses and manages the adventure data (rooms.json, etc.) after requesting it from the Rust backend.
+* **Data Handling:** Parses and manages the adventure data (adventure.json, saves, etc.) using the Tauri FS plugin for file I/O.
 * **UI & Animations:** Renders all visual elements using React and applies all aesthetic styling and micro-animations via CSS and Framer Motion.
 
 ### **3.2. Backend Responsibilities (Rust)**
 
-The Rust backend will expose a minimal set of Tauri commands to the frontend:
+The application uses the **Tauri File System Plugin** for all file operations:
 
-* read_file(path: String) -> Result<String, String>: Reads a file and returns its contents as a raw string.  
-* write_file(path: String, content: String) -> Result<(), String>: Writes a string to a specified file path.  
-* read_directory(path: String) -> Result<Vec<String>, String>: Returns a list of filenames within a given directory.
+* **Plugin**: `@tauri-apps/plugin-fs` - Provides secure file system access from JavaScript/TypeScript
+* **No custom Rust commands** - All file operations use the plugin's JavaScript API directly
+* **Key Operations**:
+  * `readTextFile(path, options)` - Read JSON files (adventures, saves)
+  * `writeTextFile(path, contents, options)` - Write JSON files
+  * `readDir(path, options)` - List directory contents
+  * `create(path, options)` - Create files/directories
+  * `exists(path, options)` - Check file existence
+* **Base Directories**: Uses `BaseDirectory.AppData` for scoped, secure file access
+* **Security**: Built-in path traversal protection and configurable permissions
 
 ## **4. Feature Specification**
 
@@ -429,7 +436,7 @@ adventures/
 This unified structure provides:
 - **Consolidated data management** with all game entities in a single Adventure object
 - **TypeScript compatibility** with full type definitions for the frontend
-- **Rust backend optimization** with clear file structure for efficient I/O operations
+- **Secure file system access** via Tauri FS plugin with built-in protection against path traversal
 - **State persistence** with comprehensive save game format
 - **Multi-adventure support** with metadata management
 - **Extensibility** with custom properties and state templates

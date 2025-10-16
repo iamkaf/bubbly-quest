@@ -44,48 +44,54 @@ Establish the development environment with all required dependencies and create 
 Implement the foundational architecture with Zustand stores and basic UI framework.
 
 ### **Tasks**
-- [ ] Create Zustand store structure:
-  - [ ] Game Store for player stats and game state
-  - [ ] UI Store for theme and interface state
-  - [ ] Adventure Store for loaded adventure data
-- [ ] Implement basic TypeScript interfaces for all data structures
-- [ ] Create base UI components with rounded corners and playful styling
-- [ ] Set up CSS Custom Properties for theming system
-- [ ] Implement basic theme switching (light/dark)
-- [ ] Create main application layout with component structure
-- [ ] Set up routing between main screens (game, editor, settings)
+- [x] Create Zustand store structure:
+  - [x] Game Store for player stats and game state
+  - [x] UI Store for theme and interface state
+  - [x] Adventure Store for loaded adventure data
+- [x] Implement basic TypeScript interfaces for all data structures
+- [x] Create base UI components with rounded corners and playful styling
+- [x] Set up CSS Custom Properties for theming system
+- [x] Implement basic theme switching (light/dark)
+- [x] Create main application layout with component structure
+- [x] Set up routing between main screens (game, editor, settings)
 
 ### **Deliverables**
-- Complete Zustand store architecture
-- Basic UI framework with playful styling
-- Theme system foundation
-- Core application structure
+- ✅ Complete Zustand store architecture with Immer middleware
+- ✅ Basic UI framework with playful styling (Button, Card, Container, ThemeSelector, Layout)
+- ✅ Theme system foundation (8 themes: Bubbly Original, Midnight Cozy, Strawberry Sunset, Matcha Mochi, Sakura Spring, Starlight Velvet, Arcade Night, Autumn Grimoire)
+- ✅ Core application structure with React Router navigation
+- ✅ All TypeScript interfaces for game data structures
 
 ---
 
 ## **Phase 3: Data Structures & File System**
 
 ### **Objectives**
-Implement the unified Adventure data structure and integrate with Rust backend for file operations.
+Implement file system operations using Tauri FS plugin and create example adventure data.
 
 ### **Tasks**
-- [ ] Implement complete TypeScript interfaces for Adventure data structure
-- [ ] Create Rust backend functions:
-  - [ ] `read_file(path: String) -> Result<String, String>`
-  - [ ] `write_file(path: String, content: String) -> Result<(), String>`
-  - [ ] `read_directory(path: String) -> Result<Vec<String>, String>`
-- [ ] Create frontend services for file operations
-- [ ] Implement Adventure loading and parsing logic
+- [ ] Create file system service layer using Tauri FS plugin
+  - [ ] Implement `readAdventure()` using `readTextFile()` with `BaseDirectory.AppData`
+  - [ ] Implement `writeAdventure()` using `writeTextFile()`
+  - [ ] Implement `listAdventures()` using `readDir()`
+  - [ ] Implement `readSaveGame()` and `writeSaveGame()`
+  - [ ] Add proper error handling and type validation with Zod
 - [ ] Create example adventure data for testing
+  - [ ] Design a small starter adventure (3-5 rooms, 5+ items, 2-3 monsters)
+  - [ ] Create adventure.json with all required fields
+  - [ ] Write adventure to AppData directory on first run
 - [ ] Set up file organization structure (adventures/, saves/, etc.)
 - [ ] Implement adventure list management
-- [ ] Add error handling for file operations
+  - [ ] Load adventure index.json on app startup
+  - [ ] Populate Adventure Store with available adventures
+- [ ] Add Zod schemas for runtime validation
+- [ ] Test file operations with actual Tauri environment
 
 ### **Deliverables**
-- Complete Adventure data structure implementation
-- Working Rust backend file operations
-- Adventure loading/saving functionality
-- Example adventure for testing
+- Complete file system service using Tauri FS plugin
+- Adventure loading/saving functionality with error handling
+- Example adventure data for testing
+- Runtime validation with Zod schemas
 
 ---
 
@@ -203,24 +209,24 @@ Enhance the user interface with animations, transitions, and the playful "toy bo
 - [ ] Add animated stat bars (HP, XP)
 - [ ] Implement 10+ complete themes with CSS Custom Properties
   - Light Themes ☀️
-    - [ ] Bubbly Original 🫧
+    - [x] Bubbly Original 🫧
       - The signature theme: soft creams, pastel blues, and candy pinks.
-    - [ ] Strawberry Sunset 🍓
+    - [x] Strawberry Sunset 🍓
       - Vibrant and sweet: warm pinks, sunny yellows, and a touch of mint green.
-    - [ ] Matcha Mochi 🍵
+    - [x] Matcha Mochi 🍵
       - Calm and gentle: a soothing palette of soft greens, white, and earthy tones.
-    - [ ] Sakura Spring 🌸
+    - [x] Sakura Spring 🌸
       - Light and airy: cherry blossom pinks, sky blues, and clean whites.
     - [ ] Cozy Cottage 🧸
       - Warm and friendly: soft browns, tans, and a single, warm accent color like honey.
   - Dark Themes 🌙
-    - [ ] Midnight Cozy 🌃
+    - [x] Midnight Cozy 🌃
       - A comfortable dark mode: deep navy blues, soft lavender, and glowing text.
-    - [ ] Starlight Velvet ✨
+    - [x] Starlight Velvet ✨
       - Magical and luxurious: a deep indigo background with sparkling gold and silver accents.
-    - [ ] Arcade Night 👾
+    - [x] Arcade Night 👾
       - Retro and fun: a black background with pops of bright, neon colors like magenta, cyan, and lime.
-    - [ ] Autumn Grimoire 🎃
+    - [x] Autumn Grimoire 🎃
       - Mysterious and warm: deep oranges, rich burgundies, and dark browns, like an ancient magic book.
     - [ ] Abyssal Tide 🌊
       - Deep and mysterious: a cool-toned theme with dark teals, deep purples, and phosphorescent highlights.

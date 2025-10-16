@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npx tsc:*)",
+      "Bash(npm run check:*)",
+      "WebFetch(domain:v2.tauri.app)"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}

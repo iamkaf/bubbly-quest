@@ -42,6 +42,132 @@
   --font-title: 'Rubik Mono One', monospace;
 }
 
+/* Light Theme - Strawberry Sunset 🍓 */
+[data-theme='strawberry-sunset'] {
+  --bg-primary: #fff5f7;
+  --bg-secondary: #ffe3e8;
+  --bg-tertiary: #ffd1dc;
+  --text-primary: #2d1b1e;
+  --text-secondary: #7d5a60;
+  --text-muted: #a68a8f;
+  --accent-primary: #ff6b9d;
+  --accent-secondary: #ffd93d;
+  --accent-tertiary: #6bffb8;
+  --border-radius-small: 12px;
+  --border-radius-medium: 20px;
+  --border-radius-large: 32px;
+  --shadow-light: 0 4px 6px rgba(255, 107, 157, 0.15);
+  --shadow-medium: 0 8px 12px rgba(255, 107, 157, 0.2);
+  --shadow-heavy: 0 12px 24px rgba(255, 107, 157, 0.25);
+  --font-primary: 'Baloo 2', cursive;
+  --font-title: 'Rubik Mono One', monospace;
+}
+
+/* Light Theme - Matcha Mochi 🍵 */
+[data-theme='matcha-mochi'] {
+  --bg-primary: #f5f9f5;
+  --bg-secondary: #e8f5e8;
+  --bg-tertiary: #d4ead4;
+  --text-primary: #1e2d1e;
+  --text-secondary: #5a7d5a;
+  --text-muted: #8aa68a;
+  --accent-primary: #7cb97c;
+  --accent-secondary: #c8e6c8;
+  --accent-tertiary: #f0ebe5;
+  --border-radius-small: 12px;
+  --border-radius-medium: 20px;
+  --border-radius-large: 32px;
+  --shadow-light: 0 4px 6px rgba(124, 185, 124, 0.15);
+  --shadow-medium: 0 8px 12px rgba(124, 185, 124, 0.2);
+  --shadow-heavy: 0 12px 24px rgba(124, 185, 124, 0.25);
+  --font-primary: 'Baloo 2', cursive;
+  --font-title: 'Rubik Mono One', monospace;
+}
+
+/* Light Theme - Sakura Spring 🌸 */
+[data-theme='sakura-spring'] {
+  --bg-primary: #fff9fc;
+  --bg-secondary: #ffe4f0;
+  --bg-tertiary: #ffd4e8;
+  --text-primary: #2d1e28;
+  --text-secondary: #7d5a70;
+  --text-muted: #a68a9a;
+  --accent-primary: #ffb3d9;
+  --accent-secondary: #a8d8ff;
+  --accent-tertiary: #fffacd;
+  --border-radius-small: 12px;
+  --border-radius-medium: 20px;
+  --border-radius-large: 32px;
+  --shadow-light: 0 4px 6px rgba(255, 179, 217, 0.15);
+  --shadow-medium: 0 8px 12px rgba(255, 179, 217, 0.2);
+  --shadow-heavy: 0 12px 24px rgba(255, 179, 217, 0.25);
+  --font-primary: 'Baloo 2', cursive;
+  --font-title: 'Rubik Mono One', monospace;
+}
+
+/* Dark Theme - Starlight Velvet ✨ */
+[data-theme='starlight-velvet'] {
+  --bg-primary: #1a1432;
+  --bg-secondary: #251d3d;
+  --bg-tertiary: #342a4f;
+  --text-primary: #f0e6ff;
+  --text-secondary: #c4b5d9;
+  --text-muted: #8a7a9e;
+  --accent-primary: #d4af37;
+  --accent-secondary: #c0c0c0;
+  --accent-tertiary: #9d7ce8;
+  --border-radius-small: 12px;
+  --border-radius-medium: 20px;
+  --border-radius-large: 32px;
+  --shadow-light: 0 4px 6px rgba(212, 175, 55, 0.3);
+  --shadow-medium: 0 8px 12px rgba(212, 175, 55, 0.4);
+  --shadow-heavy: 0 12px 24px rgba(212, 175, 55, 0.5);
+  --font-primary: 'Baloo 2', cursive;
+  --font-title: 'Rubik Mono One', monospace;
+}
+
+/* Dark Theme - Arcade Night 👾 */
+[data-theme='arcade-night'] {
+  --bg-primary: #0a0a0a;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #2a2a2a;
+  --text-primary: #00ff00;
+  --text-secondary: #00cccc;
+  --text-muted: #888888;
+  --accent-primary: #ff00ff;
+  --accent-secondary: #00ffff;
+  --accent-tertiary: #ffff00;
+  --border-radius-small: 12px;
+  --border-radius-medium: 20px;
+  --border-radius-large: 32px;
+  --shadow-light: 0 4px 6px rgba(255, 0, 255, 0.4);
+  --shadow-medium: 0 8px 12px rgba(255, 0, 255, 0.5);
+  --shadow-heavy: 0 12px 24px rgba(255, 0, 255, 0.6);
+  --font-primary: 'Baloo 2', cursive;
+  --font-title: 'Rubik Mono One', monospace;
+}
+
+/* Dark Theme - Autumn Grimoire 🎃 */
+[data-theme='autumn-grimoire'] {
+  --bg-primary: #2d1810;
+  --bg-secondary: #3d2518;
+  --bg-tertiary: #4f3020;
+  --text-primary: #ffe6d5;
+  --text-secondary: #d9b89f;
+  --text-muted: #9e887a;
+  --accent-primary: #ff8c42;
+  --accent-secondary: #b8405e;
+  --accent-tertiary: #8b4513;
+  --border-radius-small: 12px;
+  --border-radius-medium: 20px;
+  --border-radius-large: 32px;
+  --shadow-light: 0 4px 6px rgba(255, 140, 66, 0.3);
+  --shadow-medium: 0 8px 12px rgba(255, 140, 66, 0.4);
+  --shadow-heavy: 0 12px 24px rgba(255, 140, 66, 0.5);
+  --font-primary: 'Baloo 2', cursive;
+  --font-title: 'Rubik Mono One', monospace;
+}
+
 /* Global styles */
 * {
   box-sizing: border-box;

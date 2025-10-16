@@ -49,16 +49,34 @@ Stores are defined in `src/stores/` and exported via `src/stores/index.ts`.
 - All game engine logic (movement, combat, inventory)
 - Command parser with natural language support, synonyms, and compound commands
 - State management with Zustand
+- File system operations via Tauri FS plugin
 - Data parsing and management (adventures, saves)
 - UI rendering with React and animations via Framer Motion
 
 ### Backend Responsibilities (Rust)
-Minimal Tauri commands for file system operations only:
-- `read_file(path: String) -> Result<String, String>`
-- `write_file(path: String, content: String) -> Result<(), String>`
-- `read_directory(path: String) -> Result<Vec<String>, String>`
+Uses the **Tauri File System Plugin** (`@tauri-apps/plugin-fs`) for all file operations:
+- No custom Rust commands needed - the plugin handles all file I/O
+- File operations are called directly from TypeScript using the plugin's JavaScript API
+- Common operations: `readTextFile()`, `writeTextFile()`, `create()`, `readDir()`, `exists()`
+- Uses `BaseDirectory` enum for safe, scoped file access (e.g., `BaseDirectory.AppData`)
+- Prevents path traversal attacks and provides configurable permissions
 
 **No game logic in Rust** - all logic stays in JavaScript/TypeScript.
+
+**Example usage:**
+```typescript
+import { readTextFile, writeTextFile, BaseDirectory } from '@tauri-apps/plugin-fs';
+
+// Read adventure file
+const adventure = await readTextFile('adventures/my-adventure/adventure.json', {
+  baseDir: BaseDirectory.AppData
+});
+
+// Write save game
+await writeTextFile('saves/slot1.json', JSON.stringify(saveData), {
+  baseDir: BaseDirectory.AppData
+});
+```
 
 ### TypeScript Path Aliases
 ```typescript
@@ -132,9 +150,9 @@ The parser supports:
 
 ## Project Status
 
-Currently in **Phase 1** (Foundation & Dependencies) - basic "Hello World" application with all core dependencies installed and configured. See `TODO.md` for the complete 10-phase implementation plan.
+Currently in **Phase 2** (Core Architecture & State Management) - Complete Zustand store architecture, routing, theme system with 8 themes, and base UI components. See `TODO.md` for the complete 10-phase implementation plan.
 
-Next phases: State management architecture (Phase 2), data structures & file system (Phase 3), command parser (Phase 4).
+Next phase: Data structures & file system integration with Tauri FS plugin (Phase 3).
 
 ## Testing & Validation
 
