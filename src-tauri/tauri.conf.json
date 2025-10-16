@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "bubbly-quest",
+  "productName": "Bubbly Quest",
   "version": "0.1.0",
   "identifier": "com.iamkaf.bubbly-quest",
   "build": {
@@ -12,9 +12,9 @@
   "app": {
     "windows": [
       {
-        "title": "bubbly-quest",
-        "width": 800,
-        "height": 600
+        "title": "Bubbly Quest",
+        "width": 1280,
+        "height": 720
       }
     ],
     "security": {
