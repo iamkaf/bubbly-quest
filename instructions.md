@@ -15,7 +15,7 @@ The core philosophy is rooted in a **playful, toy-like user experience**. The ap
 
 ### **2.1. Platform**
 
-* **Target:** Cross-platform Desktop (Windows, macOS, Linux), enabled by the Tauri framework.
+* **Target:** Windows Desktop only, enabled by the Tauri framework.
 
 ### **2.2. Technology Stack**
 
@@ -105,7 +105,7 @@ The project consists of two distinct applications: the **Game Player** and the *
 * Save files will be stored as individual JSON files (e.g., save_slot_1.json) within a saves directory.  
 * The load menu will visually present the available save slots, showing metadata like Player Name, Level, and a timestamp.
 
-### **4.2. The Adventure Editor ("Quick-Forge")**
+### **4.2. The Adventure Editor ("Fabula Machina")**
 
 * **UI Philosophy:** A simplified, form-based interface designed for efficiency. The "bubbly" aesthetic is secondary to functional clarity here.  
 * **Functionality:**  
