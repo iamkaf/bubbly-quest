@@ -362,11 +362,30 @@ export interface UIStore {
 }
 
 export interface AdventureStore {
+  // Data
   currentAdventure: Adventure | null;
   adventureList: AdventureList | null;
 
-  // Actions
+  // Loading states
+  isLoading: boolean;
+  isLoadingAdventure: boolean;
+
+  // Error states
+  error: string | null;
+
+  // Synchronous actions
   loadAdventure: (adventure: Adventure) => void;
   loadAdventureList: (list: AdventureList) => void;
   resetAdventure: () => void;
+  setError: (error: string | null) => void;
+  clearError: () => void;
+
+  // Asynchronous actions
+  loadAdventureFromFile: (adventureId: string) => Promise<boolean>;
+  saveAdventureToFile: (adventure: Adventure) => Promise<boolean>;
+  refreshAdventureList: () => Promise<boolean>;
+  updateAdventureListMetadata: (
+    adventureId: string,
+    updates: Partial<AdventureMetadata>,
+  ) => Promise<boolean>;
 }
