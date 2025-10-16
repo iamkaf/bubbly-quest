@@ -17,18 +17,18 @@ This document outlines a 10-phase implementation plan for Bubbly Quest, breaking
 Establish the development environment with all required dependencies and create a basic "Hello World" application.
 
 ### **Tasks**
-- [ ] Initialize Tauri project with React + TypeScript + Vite
-- [ ] Install and configure core dependencies:
-  - [ ] Zustand for state management
-  - [ ] Framer Motion for animations
-  - [ ] Phosphor React for icons
-  - [ ] Fontsource packages for Baloo 2 and Rubik Mono One
-- [ ] Set up basic project structure and folders
-- [ ] Configure TypeScript with strict mode
-- [ ] Set up ESLint and Prettier for code consistency
-- [ ] Create basic "Hello World" UI component
-- [ ] Verify Tauri build process works on Windows
-- [ ] Set up development workflow with hot reload
+- [x] Initialize Tauri project with React + TypeScript + Vite
+- [x] Install and configure core dependencies:
+  - [x] Zustand for state management
+  - [x] Framer Motion for animations
+  - [x] Phosphor React for icons
+  - [x] Fontsource packages for Baloo 2 and Rubik Mono One
+- [x] Set up basic project structure and folders
+- [x] Configure TypeScript with strict mode
+- [x] Set up ESLint and Prettier for code consistency
+- [x] Create basic "Hello World" UI component
+- [x] Verify Tauri build process works on Windows
+- [x] Set up development workflow with hot reload
 
 ### **Deliverables**
 - Working Tauri application that displays "Hello World"

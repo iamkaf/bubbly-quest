@@ -1,0 +1,107 @@
+/* CSS Custom Properties for Bubbly Quest Theming System */
+
+:root {
+  /* Light Theme - Bubbly Original 🫧 */
+  --bg-primary: #f8f9fa;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #e9ecef;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-muted: #adb5bd;
+  --accent-primary: #74c0fc;
+  --accent-secondary: #ffa8a8;
+  --accent-tertiary: #b2f2bb;
+  --border-radius-small: 12px;
+  --border-radius-medium: 20px;
+  --border-radius-large: 32px;
+  --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 8px 12px rgba(0, 0, 0, 0.15);
+  --shadow-heavy: 0 12px 24px rgba(0, 0, 0, 0.2);
+  --font-primary: 'Baloo 2', cursive;
+  --font-title: 'Rubik Mono One', monospace;
+}
+
+/* Dark Theme - Midnight Cozy 🌃 */
+[data-theme='midnight-cozy'] {
+  --bg-primary: #1a1d29;
+  --bg-secondary: #222633;
+  --bg-tertiary: #2a2f3f;
+  --text-primary: #e9ecef;
+  --text-secondary: #adb5bd;
+  --text-muted: #6c757d;
+  --accent-primary: #a5d8ff;
+  --accent-secondary: #fcc2d7;
+  --accent-tertiary: #b2f2bb;
+  --border-radius-small: 12px;
+  --border-radius-medium: 20px;
+  --border-radius-large: 32px;
+  --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-medium: 0 8px 12px rgba(0, 0, 0, 0.4);
+  --shadow-heavy: 0 12px 24px rgba(0, 0, 0, 0.5);
+  --font-primary: 'Baloo 2', cursive;
+  --font-title: 'Rubik Mono One', monospace;
+}
+
+/* Global styles */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-primary);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-title);
+  margin: 0;
+}
+
+button {
+  font-family: var(--font-primary);
+  border-radius: var(--border-radius-medium);
+  border: none;
+  padding: 12px 24px;
+  background-color: var(--accent-primary);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-weight: 600;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-medium);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: var(--shadow-light);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.card {
+  background-color: var(--bg-secondary);
+  border-radius: var(--border-radius-large);
+  padding: 24px;
+  box-shadow: var(--shadow-light);
+  transition: all 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-4px);
+}
