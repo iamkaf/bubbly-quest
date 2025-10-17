@@ -10,11 +10,6 @@ export default defineConfig(async () => ({
   resolve: {
     alias: {
       "@": "/src",
-      "@/components": "/src/components",
-      "@/stores": "/src/stores",
-      "@/styles": "/src/styles",
-      "@/types": "/src/types",
-      "@/utils": "/src/utils",
     },
   },
 

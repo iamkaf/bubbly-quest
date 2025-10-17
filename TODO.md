@@ -1,368 +1,493 @@
-# **Bubbly Quest - Implementation Plan**
+# **Bubbly Quest - UI Implementation Plan**
 
-* **Project:** Bubbly Quest  
-* **Version:** 1.0  
-* **Date:** October 16, 2025  
-* **Author:** Senpai & Gemini
+* **Project:** Bubbly Quest UI
+* **Version:** 1.0
+* **Date:** October 17, 2025
+* **Author:** Claude
 
 ## **Overview**
 
-This document outlines a 10-phase implementation plan for Bubbly Quest, breaking down the comprehensive specification into manageable milestones. Each phase builds upon the previous one, ensuring a systematic approach to development from basic setup to final release.
+This document outlines the complete UI implementation plan for Bubbly Quest, a desktop text-based adventure game frontend that integrates with the external C.H.A.R.G.E. game engine. The UI follows a playful, toy-like aesthetic with heavily rounded corners, micro-animations, and a delightful user experience.
 
 ---
 
-## **Phase 1: Foundation & Dependencies**
+## **Phase 1: Setup & Architecture**
 
 ### **Objectives**
-Establish the development environment with all required dependencies and create a basic "Hello World" application.
+Establish the foundational architecture and project structure for the UI implementation.
 
 ### **Tasks**
-- [x] Initialize Tauri project with React + TypeScript + Vite
-- [x] Install and configure core dependencies:
-  - [x] Zustand for state management
-  - [x] Framer Motion for animations
-  - [x] Phosphor React for icons
-  - [x] Fontsource packages for Baloo 2 and Rubik Mono One
-- [x] Set up basic project structure and folders
-- [x] Configure TypeScript with strict mode
-- [x] Set up ESLint and Prettier for code consistency
-- [x] Create basic "Hello World" UI component
-- [x] Verify Tauri build process works on Windows
-- [x] Set up development workflow with hot reload
+- [ ] Install additional dependencies:
+  - [ ] phosphor-react for consistent iconography
+  - [ ] framer-motion for animations
+  - [ ] zustand for UI state management
+  - [ ] @phosphor-icons/react for comprehensive icon set
+- [ ] Create directory structure:
+  - [ ] src/components/ui/ - Base UI components
+  - [ ] src/components/screens/ - Screen components
+  - [ ] src/components/game/ - Game-specific components
+  - [ ] src/components/editor/ - Adventure editor components
+  - [ ] src/hooks/ - Custom React hooks
+  - [ ] src/types/ - UI type definitions
+- [ ] Set up Zustand stores for UI state only:
+  - [ ] ThemeStore (theme selection, preferences)
+  - [ ] NavigationStore (current screen, routing state)
+  - [ ] UIStore (loading states, modals, notifications)
+- [ ] Create type definitions:
+  - [ ] UI component interfaces
+  - [ ] Game state interfaces (matching C.H.A.R.G.E.)
+  - [ ] Navigation and routing types
+- [ ] Configure path aliases in tsconfig.json and vite.config.ts:
+  - [ ] @/components/* -> src/components/*
+  - [ ] @/lib/* -> src/lib/*
+  - [ ] @/types/* -> src/types/*
+  - [ ] @/hooks/* -> src/hooks/*
+- [ ] Set up React Router DOM for navigation:
+  - [ ] Configure router for Game Player and Adventure Editor
+  - [ ] Create route guards and navigation helpers
+- [ ] Create basic Layout wrapper:
+  - [ ] Responsive layout structure
+  - [ ] Theme provider integration
+  - [ ] Basic navigation header
+- [ ] Test Phase 1 setup:
+  - [ ] Verify all dependencies install correctly
+  - [ ] Test basic component imports
+  - [ ] Ensure TypeScript compilation
 
 ### **Deliverables**
-- Working Tauri application that displays "Hello World"
-- All dependencies properly installed and configured
-- Basic project structure in place
-- Development environment verified
+- Complete project structure with organized component directories
+- Zustand stores for UI state management
+- Type definitions for all UI components
+- Working React Router setup
+- Basic Layout component
+- All TypeScript compilation and build checks passing
 
 ---
 
-## **Phase 2: Core Architecture & State Management**
+## **Phase 2: Themes & Theme Switcher**
 
 ### **Objectives**
-Implement the foundational architecture with Zustand stores and basic UI framework.
+Implement a comprehensive theming system with 10 themes (5 light, 5 dark) and smooth theme switching.
 
 ### **Tasks**
-- [x] Create Zustand store structure:
-  - [x] Game Store for player stats and game state
-  - [x] UI Store for theme and interface state
-  - [x] Adventure Store for loaded adventure data
-- [x] Implement basic TypeScript interfaces for all data structures
-- [x] Create base UI components with rounded corners and playful styling
-- [x] Set up CSS Custom Properties for theming system
-- [x] Implement basic theme switching (light/dark)
-- [x] Create main application layout with component structure
-- [x] Set up routing between main screens (game, editor, settings)
+- [ ] Implement 10 complete themes using Tailwind v4 + shadcn:
+  - [ ] Light Themes ☀️
+    - [ ] **Bubbly Original** 🫧 - Soft creams, pastel blues, candy pinks
+    - [ ] **Strawberry Sunset** 🍓 - Warm pinks, sunny yellows, mint green
+    - [ ] **Matcha Mochi** 🍵 - Soft greens, white, earthy tones
+    - [ ] **Sakura Spring** 🌸 - Cherry blossom pinks, sky blues, clean whites
+    - [ ] **Cozy Cottage** 🧸 - Warm browns, tans, honey accent
+  - [ ] Dark Themes 🌙
+    - [ ] **Midnight Cozy** 🌃 - Deep navy blues, soft lavender, glowing text
+    - [ ] **Starlight Velvet** ✨ - Deep indigo, sparkling gold and silver
+    - [ ] **Arcade Night** 👾 - Black background with neon magenta, cyan, lime
+    - [ ] **Autumn Grimoire** 🎃 - Deep oranges, rich burgundies, dark browns
+    - [ ] **Abyssal Tide** 🌊 - Dark teals, deep purples, phosphorescent highlights
+- [ ] Create ThemeSelector component:
+  - [ ] Dropdown/selector with theme previews
+  - [ ] Smooth theme switching animations
+  - [ ] Theme persistence in localStorage
+- [ ] Implement CSS Custom Properties system:
+  - [ ] OKLCH color space for better color consistency
+  - [ ] Semantic color tokens (primary, secondary, muted, etc.)
+  - [ ] Theme-specific accent colors and gradients
+- [ ] Add theme switching animations:
+  - [ ] Smooth color transitions
+  - [ ] Component state transitions
+  - [ ] Loading states during theme changes
+- [ ] Create theme showcase/documentation:
+  - [ ] Demonstrate all themes with live preview
+  - [ ] Document color values and design decisions
+  - [ ] Theme accessibility testing
 
 ### **Deliverables**
-- ✅ Complete Zustand store architecture with Immer middleware
-- ✅ Basic UI framework with playful styling (Button, Card, Container, ThemeSelector, Layout)
-- ✅ Theme system foundation (8 themes: Bubbly Original, Midnight Cozy, Strawberry Sunset, Matcha Mochi, Sakura Spring, Starlight Velvet, Arcade Night, Autumn Grimoire)
-- ✅ Core application structure with React Router navigation
-- ✅ All TypeScript interfaces for game data structures
+- 10 complete, working themes with proper color contrast
+- ThemeSelector component with smooth switching
+- Theme persistence system
+- Theme documentation and showcase
+- All themes passing accessibility checks
 
 ---
 
-## **Phase 3: Data Structures & File System**
+## **Phase 3: Complete UI Component Suite**
 
 ### **Objectives**
-Implement file system operations using Tauri FS plugin and create example adventure data.
+Build a comprehensive library of reusable UI components using Tailwind v4 + shadcn.
 
-### **Tasks**
-- [x] Create file system service layer using Tauri FS plugin
-  - [x] Implement `readAdventure()` using `readTextFile()` with `BaseDirectory.AppData`
-  - [x] Implement `writeAdventure()` using `writeTextFile()`
-  - [x] Implement `listAdventures()` using `readDir()`
-  - [x] Implement `readSaveGame()` and `writeSaveGame()`
-  - [x] Add proper error handling and type validation with Zod
-- [x] Create example adventure data for testing
-  - [x] Design a small starter adventure (3-5 rooms, 5+ items, 2-3 monsters)
-  - [x] Create adventure.json with all required fields
-  - [x] Write adventure to AppData directory on first run
-- [x] Set up file organization structure (adventures/, saves/, etc.)
-- [x] Implement adventure list management
-  - [x] Load adventure index.json on app startup
-  - [x] Populate Adventure Store with available adventures
-- [x] Add Zod schemas for runtime validation
-- [x] Test file operations with actual Tauri environment
+### **Core Components**
+- [ ] **Button** (Multiple variants via shadcn CLI):
+  - [ ] Default, secondary, outline, ghost, link variants
+  - [ ] Sizes: sm, default, lg, icon, icon-sm, icon-lg
+  - [ ] Loading states and disabled states
+  - [ ] Bouncy press animations
+  - [ ] Hover and focus effects with wiggle/glow
+- [ ] **Card** (via shadcn CLI):
+  - [ ] Multiple variants (elevated, outline, filled)
+  - [ ] Hover animations
+  - [ ] Header, content, footer sections
+- [ ] **Container**:
+  - [ ] Responsive layout containers
+  - [ ] Max-width constraints
+  - [ ] Padding and margin utilities
+- [ ] **Badge** (via shadcn CLI):
+  - [ ] Status badges (success, warning, error, info)
+  - [ ] Animated number updates
+  - [ ] Glowing effects for important badges
+- [ ] **Separator** (via shadcn CLI):
+  - [ ] Horizontal and vertical separators
+  - [ ] Animated appearance
+
+### **Form Components**
+- [ ] **Input** (via shadcn CLI):
+  - [ ] Text, password, number, email types
+  - [ ] Floating labels and placeholders
+  - [ ] Validation states with animations
+  - [ ] Icon support
+- [ ] **Select** (via shadcn CLI):
+  - [ ] Single and multi-select
+  - [ ] Search/filter functionality
+  - [ ] Custom styling with theme support
+- [ ] **Checkbox** (via shadcn CLI):
+  - [ ] Custom checkmark animations
+  - [ ] Indeterminate state
+- [ ] **Radio** (via shadcn CLI):
+  - [ ] Custom radio button animations
+  - [ ] Group validation
+- [ ] **Slider** (via shadcn CLI):
+  - [ ] Range sliders with step support
+  - [ ] Animated thumb and track
+- [ ] **Textarea** (via shadcn CLI):
+  - [ ] Auto-resize functionality
+  - [ ] Character count with animations
+
+### **Feedback Components**
+- [ ] **Dialog** (via shadcn CLI):
+  - [ ] Modal dialogs with backdrop
+  - [ ] Slide and scale animations
+  - [ ] Confirm, alert, and custom content types
+- [ ] **Alert** (via shadcn CLI):
+  - [ ] Success, warning, error, info variants
+  - [ ] Dismissible with animations
+- [ ] **Toast** (via shadcn CLI):
+  - [ ] Notification system with queue
+  - [ ] Slide-in animations
+- [ ] **Loading states**:
+  - [ ] Spinners, skeleton screens, progress bars
+  - [ ] Bouncy loading animations
+
+### **Display Components**
+- [ ] **Progress Bar** (via shadcn CLI):
+  - [ ] Animated progress with smooth transitions
+  - [ ] HP/XP bars with color gradients
+  - [ ] Circular and linear variants
+- [ ] **Avatar** (via shadcn CLI):
+  - [ ] User avatars with fallback
+  - [ ] Status indicators
+- [ ] **Chip**:
+  - [ ] Tag-like components for categorization
+  - [ ] Removable with animations
+- [ ] **Tooltip** (via shadcn CLI):
+  - [ ] Contextual help text
+  - [ ] Delayed appearance animations
+
+### **Navigation Components**
+- [ ] **Tabs** (via shadcn CLI):
+  - [ ] Animated tab switching
+  - [ ] Scrollable tab lists
+- [ ] **Breadcrumbs**:
+  - [ ] Navigation path indicators
+  - [ ] Interactive with hover effects
+- [ ] **Menu** (via shadcn CLI):
+  - [ ] Dropdown and context menus
+  - [ ] Animated opening/closing
+
+### **Game-Specific Components**
+- [ ] **LogDisplay**:
+  - [ ] Auto-scrolling text area
+  - [ ] Command history with syntax highlighting
+  - [ ] Typewriter text animation
+  - [ ] Separate styling for input, output, and error messages
+- [ ] **StatBar**:
+  - [ ] Animated HP/XP bars
+  - [ ] Level progression indicators
+  - [ ] Gold and item count displays
+- [ ] **InventoryGrid**:
+  - [ ] Grid layout for items
+  - [ ] Item hover tooltips
+  - [ ] Drag and drop functionality (future enhancement)
+- [ ] **CommandInput**:
+  - [ ] Command input with history navigation (up/down arrows)
+  - [ ] Auto-complete suggestions
+  - [ ] Input validation feedback
+
+### **Animation Components**
+- [ ] **TypewriterText**:
+  - [ ] Letter-by-letter text reveal
+  - [ ] Configurable typing speed
+- [ ] **BouncyButton**:
+  - [ ] Enhanced button with bouncy press animation
+  - [ ] Customizable bounce intensity
+- [ ] **GlowEffect**:
+  - [ ] Glowing hover effects for important elements
+  - [ ] Pulsing animations
 
 ### **Deliverables**
-- ✅ Complete file system service using Tauri FS plugin (src/services/fileSystem.ts)
-  - Result-based error handling with FileSystemResult<T> type
-  - Functions: readAdventure, writeAdventure, listAdventures, readSaveGame, writeSaveGame, writeAutosave, listSaveGames
-  - Directory management: ensureDirectoryStructure, createAdventureDirectory
-  - Zod validation integrated into all read operations
-- ✅ Adventure loading/saving functionality with error handling
-  - Updated Adventure Store with async file operations
-  - Loading states (isLoading, isLoadingAdventure)
-  - Error states with descriptive messages
-  - Functions: loadAdventureFromFile, saveAdventureToFile, refreshAdventureList, updateAdventureListMetadata
-- ✅ Example adventure data: "The Crystal Caverns" (src/data/starterAdventure.ts)
-  - 5 rooms (Cavern Entrance, Dark Passage, Crystal Chamber, Treasure Room, Victory Chamber)
-  - 8 items (torch, potions, weapons, armor, key, gold, crystal shard)
-  - 3 monsters (Goblin Scout, Cave Bat, Crystal Guardian boss)
-  - Complete metadata, victory conditions, loot tables, and state templates
-- ✅ Runtime validation with Zod schemas (src/schemas/index.ts)
-  - Complete schemas for all data structures: Item, Monster, Room, Adventure, SaveGame, AdventureList
-  - Helper functions: validateAdventure, safeValidateAdventure, etc.
-  - Type-safe validation with detailed error reporting
-- ✅ Initialization service (src/services/initialize.ts)
-  - App initialization with first-run detection
-  - Automatic directory structure creation
-  - Starter adventure installation on first run
-  - Installation validation and repair functions
-- ✅ App startup integration (src/App.tsx)
-  - Automatic initialization on mount
-  - Loading and error screens
-  - Adventure list loaded into store on startup
-- ✅ Tauri FS permissions configured (src-tauri/capabilities/default.json)
-  - fs:default, fs:allow-app-read-recursive, fs:allow-app-write-recursive
+- Complete component library with all variants
+- Consistent theming across all components
+- Comprehensive animations and micro-interactions
+- Component documentation and usage examples
+- All components passing TypeScript checks
 
 ---
 
-## **Phase 4: Command Parser System**
+## **Phase 4: Layout, Router & Mock Gameplay**
 
 ### **Objectives**
-Build the powerful custom command parser with natural language processing capabilities.
+Create the main application layout, navigation system, and a fully functional mock gameplay experience.
 
 ### **Tasks**
-- [x] Design command parser architecture
-- [x] Implement basic command recognition (go, take, attack, etc.)
-- [x] Add synonym support (get/take/grab, n/north/forward)
-- [x] Implement direction aliases and mapping
-- [x] Create context-aware command processing
-- [x] Add compound command support ("take sword and attack")
-- [x] Implement inventory shortcuts (i/inventory)
-- [x] Create command validation and error feedback
-- [x] Add command history and autocomplete suggestions
-- [x] Write comprehensive unit tests for parser
+- [ ] **Layout System**:
+  - [ ] Responsive main layout with header, sidebar, content area
+  - [ ] Collapsible sidebar for inventory/stats
+  - [ ] Adaptive layout for different screen sizes
+  - [ ] Smooth layout transitions
+- [ ] **Navigation Setup**:
+  - [ ] React Router configuration for all screens
+  - [ ] Navigation guards and protected routes
+  - [ ] Breadcrumb navigation
+  - [ ] Keyboard shortcuts for navigation
+- [ ] **Main Menu Screen**:
+  - [ ] Animated title with sparkle effects
+  - [ ] Play Adventure, Adventure Editor, Settings buttons
+  - [ ] Adventure selection list (mock data)
+  - [ ] New Game/Continue Game options
+- [ ] **Game Screen Layout**:
+  - [ ] **Header Section**:
+    - [ ] Player stats display (HP, Level, Gold, Current Room)
+    - [ ] Animated stat bars
+    - [ ] Quick action buttons
+  - [ ] **Main Game Area**:
+    - [ ] Log display with auto-scrolling
+    - [ ] Room description area
+    - [ ] Context-sensitive information panels
+  - [ ] **Side Panel**:
+    - [ ] Inventory grid with item tooltips
+    - [ ] Quest display with progress
+    - [ ] Minimap (grid-based world map)
+    - [ ] Quick command buttons
+  - [ ] **Bottom Command Area**:
+    - [ ] Command input with history navigation
+    - [ ] Available commands display
+    - [ ] Contextual action buttons
+- [ ] **Mock Backend Integration**:
+  - [ ] Create mock C.H.A.R.G.E. engine interface
+  - [ ] Mock adventure data with rooms, items, monsters
+  - [ ] Command processing simulation
+  - [ ] State management for mock gameplay
+- [ ] **Game Features Implementation**:
+  - [ ] Room navigation with descriptions
+  - [ ] Item pickup and inventory management
+  - [ ] Combat display and animations
+  - [ ] Level up notifications
+  - [ ] Quest progress tracking
+- [ ] **Minimap System**:
+  - [ ] Grid-based map rendering
+  - [ ] Fog of war for undiscovered areas
+  - [ ] Player position indicator
+  - [ ] Room connection visualization
+- [ ] **Game Over/Win Screens**:
+  - [ ] Styled overlays with appropriate messaging
+  - [ ] Victory animations and effects
+  - [ ] Defeat screen with respawn options
+  - [ ] Statistics display
+- [ ] **Settings Screen**:
+  - [ ] Theme selector with live preview
+  - [ ] Audio settings (mock for now)
+  - [ ] Gameplay preferences
+  - [ ] Accessibility options
+- [ ] **Responsive Design**:
+  - [ ] Ensure proper scaling on different window sizes
+  - [ ] Mobile-friendly layouts
+  - [ ] Touch-friendly controls for future mobile support
 
 ### **Deliverables**
-- ✅ Fully functional command parser (src/utils/commandParser.ts)
-  - 683 lines with comprehensive natural language processing
-  - 50+ verb synonyms, direction aliases
-  - Context-aware parsing with fuzzy matching
-  - CommandHistory class for navigation
-  - Autocomplete suggestions
-- ✅ Command type definitions (src/types/commands.ts)
-  - ParsedCommand, CommandContext, CommandResult structures
-- ✅ Compound command support ("take sword and attack goblin")
-- ✅ Comprehensive test coverage (src/utils/commandParser.test.ts)
-  - 67 unit tests, all passing
-  - Vitest configuration with jsdom
+- Complete application layout system
+- Fully functional router and navigation
+- Mock gameplay experience with all game modes
+- Working minimap and game systems
+- Game over/victory screens
+- Responsive design implementation
+- Mock backend ready for C.H.A.R.G.E. integration
 
 ---
 
-## **Phase 5: Game Engine Core**
+## **Phase 5: Adventure Editor (Fabula Machina)**
 
 ### **Objectives**
-Implement the core game engine logic for movement, interactions, and basic gameplay.
+Build a comprehensive adventure editor for creating custom adventures that can be exported for the C.H.A.R.G.E. engine.
 
 ### **Tasks**
-- [ ] Implement player movement between rooms
-- [ ] Create item interaction system (take, drop, use)
-- [ ] Build inventory management functionality
-- [ ] Implement basic room description and feature display
-- [ ] Create exit/door system with locking mechanics
-- [ ] Add item requirements for interactions
-- [ ] Implement room state tracking (visited, items taken)
-- [ ] Create game state persistence between sessions
-- [ ] Add basic sound effects and visual feedback
-- [ ] Implement undo/redo functionality for actions
-
-### **Deliverables**
-- Core game engine functionality
-- Player movement and interaction systems
-- Inventory management
-- Basic game state persistence
-
----
-
-## **Phase 6: Combat & RPG Systems**
-
-### **Objectives**
-Implement the combat system, character progression, and RPG mechanics.
-
-### **Tasks**
-- [ ] Create combat system architecture
-- [ ] Implement turn-based combat mechanics
-- [ ] Add monster AI with different behavior patterns
-- [ ] Create damage calculation system with attack/defense stats
-- [ ] Implement player leveling and stat progression
-- [ ] Add XP gain and level-up mechanics
-- [ ] Create equipment system (weapons, armor)
-- [ ] Implement item usage in combat (potions, etc.)
-- [ ] Add combat animations and visual effects
-- [ ] Create combat log and feedback system
-
-### **Deliverables**
-- Complete combat system
-- Character progression mechanics
-- Equipment and item usage
-- Combat animations and feedback
-
----
-
-## **Phase 7: Adventure Editor**
-
-### **Objectives**
-Build the "Fabula Machina" adventure editor for creating custom adventures.
-
-### **Tasks**
-- [ ] Create editor UI layout with tabbed interface
-- [ ] Implement Room editor with exit management
-- [ ] Build Item editor with all item types and properties
-- [ ] Create Monster editor with behavior and loot configuration
-- [ ] Add adventure metadata and configuration editor
-- [ ] Implement adventure preview mode
-- [ ] Create adventure export/import functionality
-- [ ] Add validation for adventure data integrity
-- [ ] Implement adventure template system
-- [ ] Create editor help system and documentation
+- [ ] **Editor Layout and Navigation**:
+  - [ ] Tabbed interface (Rooms, Items, Monsters, Quests, Events, Settings)
+  - [ ] Persistent sidebar with project navigation
+  - [ ] Save/Export toolbar
+  - [ ] Undo/redo functionality
+- [ ] **Project Management**:
+  - [ ] New adventure creation wizard
+  - [ ] Load existing adventure files
+  - [ ] Project metadata editor (title, author, description)
+  - [ ] Save/Export functionality
+- [ ] **Room Editor**:
+  - [ ] Visual grid-based room creator
+  - [ ] Room property editor (name, description, atmosphere)
+  - [ ] Exit management system (direction-based connections)
+  - [ ] Item and monster placement in rooms
+  - [ ] Interactive feature creator
+  - [ ] Room preview and testing
+- [ ] **Item Editor**:
+  - [ ] Form-based item creation
+  - [ ] Support for all item types (consumable, weapon, armor, key, treasure, misc)
+  - [ ] Type-specific property editors
+  - [ ] Item rarity and value settings
+  - [ ] Icon selection (from Phosphor icons)
+- [ ] **Monster Editor**:
+  - [ ] Complete monster creation interface
+  - [ ] Stats and behavior configuration
+  - [ ] AI behavior settings (aggression, attack patterns)
+  - [ ] Special attack configuration
+  - [ ] Loot table editor
+  - [ ] Appearance customization
+- [ ] **Quest System Editor**:
+  - [ ] Visual quest tree creation
+  - [ ] Quest objective configuration
+  - [ ] Condition and reward setup
+  - [ ] Quest dependency management
+- [ ] **Event System Editor**:
+  - [ ] Global event creation interface
+  - [ ] Condition builder (AND/OR logic)
+  - [ ] Action configuration (show message, give item, change state)
+  - [ ] Event testing and debugging
+- [ ] **Adventure Testing**:
+  - [ ] Built-in adventure preview mode
+  - [ ] Test the adventure with mock C.H.A.R.G.E. integration
+  - [ ] Debug console for event testing
+  - [ ] Performance testing tools
+- [ ] **Export System**:
+  - [ ] Generate adventure.json compatible with C.H.A.R.G.E.
+  - [ ] Data validation against C.H.A.R.G.E. schema
+  - [ ] Export options (full package, individual files)
+  - [ ] Adventure sharing functionality (import/export)
+- [ ] **Data Validation**:
+  - [ ] Real-time validation against C.H.A.R.G.E. schema
+  - [ ] Error highlighting and suggestions
+  - [ ] Data integrity checks
+  - [ ] Adventure completeness verification
 
 ### **Deliverables**
 - Complete adventure editor interface
-- Full CRUD operations for all game entities
-- Adventure export/import functionality
-- Validation and template systems
+- Visual room and world creation tools
+- Comprehensive item and monster editors
+- Quest and event creation systems
+- Adventure testing and preview functionality
+- Export system compatible with C.H.A.R.G.E. engine
+- Data validation and error checking
 
 ---
 
-## **Phase 8: UI Polish & Animations**
+## **Technical Requirements & Design Adherence**
 
-### **Objectives**
-Enhance the user interface with animations, transitions, and the playful "toy box" aesthetic.
+### **Design Language**
+- **Aesthetic**: Playful, toy-like with heavily rounded corners (border-radius: 1rem+)
+- **Animations**: Bouncy buttons (scale transforms), text typing effects, hover wiggles/glow
+- **Colors**: Soft color palette with high contrast for accessibility
+- **Typography**: Baloo 2 (body text), Rubik Mono One (titles and headers)
+- **Spacing**: Generous padding and margins for toy-like appearance
+- **Interactions**: All interactive elements should feel pressable and responsive
 
-### **Tasks**
-- [ ] Implement Framer Motion animations throughout the UI
-- [ ] Create bouncy, pressable button animations
-- [ ] Add text typing/fading effects for game output
-- [ ] Implement wiggle/glow hover effects
-- [ ] Create smooth screen transitions
-- [ ] Add animated stat bars (HP, XP)
-- [ ] Implement 10+ complete themes with CSS Custom Properties
-  - Light Themes ☀️
-    - [x] Bubbly Original 🫧
-      - The signature theme: soft creams, pastel blues, and candy pinks.
-    - [x] Strawberry Sunset 🍓
-      - Vibrant and sweet: warm pinks, sunny yellows, and a touch of mint green.
-    - [x] Matcha Mochi 🍵
-      - Calm and gentle: a soothing palette of soft greens, white, and earthy tones.
-    - [x] Sakura Spring 🌸
-      - Light and airy: cherry blossom pinks, sky blues, and clean whites.
-    - [ ] Cozy Cottage 🧸
-      - Warm and friendly: soft browns, tans, and a single, warm accent color like honey.
-  - Dark Themes 🌙
-    - [x] Midnight Cozy 🌃
-      - A comfortable dark mode: deep navy blues, soft lavender, and glowing text.
-    - [x] Starlight Velvet ✨
-      - Magical and luxurious: a deep indigo background with sparkling gold and silver accents.
-    - [x] Arcade Night 👾
-      - Retro and fun: a black background with pops of bright, neon colors like magenta, cyan, and lime.
-    - [x] Autumn Grimoire 🎃
-      - Mysterious and warm: deep oranges, rich burgundies, and dark browns, like an ancient magic book.
-    - [ ] Abyssal Tide 🌊
-      - Deep and mysterious: a cool-toned theme with dark teals, deep purples, and phosphorescent highlights.
-- [ ] Add theme switching animations
-- [ ] Create loading animations and transitions
-- [ ] Implement micro-interactions for all UI elements
+### **C.H.A.R.G.E. Engine Integration**
+- **State Management**: Clean API for connecting to external game engine
+- **Type Safety**: Full TypeScript coverage matching C.H.A.R.G.E. interfaces
+- **Command Processing**: Handle parser commands and display results
+- **Game Modes**: Support for exploration, combat, dialogue, and menu modes
+- **Event Handling**: Display game events and narrative outcomes
 
-### **Deliverables**
-- Fully animated user interface
-- Complete theme system with 10+ themes
-- Smooth transitions and micro-interactions
-- Playful "toy box" aesthetic
-
----
-
-## **Phase 9: Save System & Advanced Features**
-
-### **Objectives**
-Implement the save/load system, multiple adventure support, and advanced features.
-
-### **Tasks**
-- [ ] Implement multiple save slot system
-- [ ] Create save game management interface
-- [ ] Add autosave functionality
-- [ ] Implement save game metadata display
-- [ ] Create adventure selection and management
-- [ ] Add victory condition checking and endgame
-- [ ] Implement achievement system
-- [ ] Create statistics tracking (playtime, rooms visited, etc.)
-- [ ] Add game session persistence
-- [ ] Implement adventure sharing/import functionality
-
-### **Deliverables**
-- Complete save/load system
-- Multiple adventure support
-- Achievement and statistics systems
-- Advanced game features
-
----
-
-## **Phase 10: Testing, Polish & Release**
-
-### **Objectives**
-Final testing, bug fixes, performance optimization, and release preparation.
-
-### **Tasks**
-- [ ] Conduct comprehensive testing on Windows
-- [ ] Performance profiling and optimization
-- [ ] Fix reported bugs and issues
-- [ ] Implement error handling and recovery
-- [ ] Create user documentation and help system
-- [ ] Add keyboard shortcuts and accessibility features
-- [ ] Prepare application icons and metadata
-- [ ] Create Windows installation package
-- [ ] Set up auto-update mechanism
-- [ ] Prepare release notes and documentation
-
-### **Deliverables**
-- Fully tested and polished Windows application
-- Windows installation package
-- Complete documentation
-- Release-ready product
-
----
-
-## **Milestone Checkpoints**
-
-### **After Phase 3**
-- Basic application with data loading capabilities
-- Foundation for all game systems in place
-
-### **After Phase 6**
-- Fully playable game with core mechanics
-- Combat and progression systems functional
-
-### **After Phase 8**
-- Complete user experience with animations
-- All visual and interactive elements polished
-
-### **After Phase 10**
-- Release-ready Windows product with documentation
-- Windows compatibility verified
+### **Performance & Quality**
+- **Optimizations**: Efficient animations and state updates
+- **Accessibility**: Screen reader support, keyboard navigation, ARIA labels
+- **Testing**: Component tests for critical UI elements
+- **Build**: Tauri-compatible production build
+- **Error Handling**: Graceful error states and user feedback
 
 ---
 
 ## **Risk Mitigation**
 
 ### **Technical Risks**
-- **Tauri Compatibility:** Test early on Windows target
-- **Performance:** Profile with large adventure data sets
-- **State Management:** Keep Zustand stores optimized and minimal
+- **Animation Performance**: Test animations on lower-end systems
+- **State Management**: Keep Zustand stores optimized and minimal
+- **Theme System**: Ensure CSS performance with 10+ themes
 
 ### **Design Risks**
-- **UI Complexity:** Maintain focus on playful, simple interface
-- **Command Parser:** Start simple, add complexity incrementally
-- **Animation Performance:** Test on lower-end devices
+- **UI Complexity**: Maintain focus on playful, simple interface
+- **Accessibility**: Ensure WCAG compliance with color contrast
+- **Animation Overload**: Balance animations with usability
 
-### **Timeline Risks**
-- **Scope Creep:** Stick to defined specifications
-- **Dependencies:** Verify all libraries work together on Windows
-- **Platform Issues:** Allow extra time for Windows-specific testing
+### **Integration Risks**
+- **C.H.A.R.G.E. Compatibility**: Test with actual engine package
+- **Data Migration**: Ensure save/load functionality works
+- **Performance**: Monitor memory usage with large adventures
 
 ---
 
-This implementation plan provides a structured approach to developing Bubbly Quest while ensuring quality and maintaining the playful, engaging vision outlined in the specification.
+## **Milestone Checkpoints**
+
+### **After Phase 1**
+- ✅ Complete project structure and foundation
+- ✅ All dependencies installed and configured
+- ✅ Basic layout and navigation working
+
+### **After Phase 2**
+- ✅ Complete theming system with 10 themes
+- ✅ Theme switching functionality
+- ✅ Theme documentation and showcase
+
+### **After Phase 3**
+- ✅ Complete component library
+- ✅ All components themed and animated
+- ✅ Component documentation
+
+### **After Phase 4**
+- ✅ Fully functional game interface
+- ✅ Mock gameplay experience
+- ✅ All screens responsive and accessible
+
+### **After Phase 5**
+- ✅ Complete adventure editor
+- ✅ Export system for C.H.A.R.G.E. compatibility
+- ✅ Testing and validation tools
+
+---
+
+## **Success Metrics**
+
+### **Code Quality**
+- ✅ TypeScript compilation with no errors
+- ✅ ESLint: 0 errors, 0 warnings
+- ✅ All components properly typed
+- ✅ Comprehensive component tests
+
+### **User Experience**
+- ✅ Smooth animations and transitions
+- ✅ Intuitive navigation and controls
+- ✅ Accessibility compliance (WCAG AA)
+- ✅ Responsive design on all screen sizes
+
+### **Functionality**
+- ✅ Complete mock gameplay experience
+- ✅ Full adventure editor functionality
+- ✅ Theme system working perfectly
+- ✅ Ready for C.H.A.R.G.E. engine integration
+
+---
+
+**This implementation plan provides a comprehensive roadmap for creating a delightful, feature-rich UI for Bubbly Quest that perfectly complements the C.H.A.R.G.E. game engine while maintaining the playful, toy-like aesthetic that makes the application unique and engaging.**
