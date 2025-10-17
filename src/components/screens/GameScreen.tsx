@@ -1,10 +1,16 @@
 import { motion } from 'framer-motion';
 import { ArrowLeft } from 'phosphor-react';
 import { useNavigate } from 'react-router-dom';
+import { info } from '@tauri-apps/plugin-log';
 import { Container, Card, Button } from '@/components';
 
 export const GameScreen = () => {
   const navigate = useNavigate();
+
+  const handleBackToMenu = () => {
+    info('Navigating back to main menu from game screen');
+    navigate('/');
+  };
 
   return (
     <Container className="min-h-screen py-8">
@@ -12,7 +18,7 @@ export const GameScreen = () => {
         <Button
           variant="secondary"
           className="mb-6 flex items-center gap-2"
-          onClick={() => navigate('/')}
+          onClick={handleBackToMenu}
         >
           <ArrowLeft size={20} />
           Back to Menu

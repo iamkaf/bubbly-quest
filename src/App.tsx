@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { Layout, MainMenu, GameScreen, EditorScreen, SettingsScreen } from '@/components';
 import { useAdventureStore } from '@/stores';
@@ -8,8 +8,16 @@ function App() {
   const [isInitializing, setIsInitializing] = useState(true);
   const [initError, setInitError] = useState<string | null>(null);
   const loadAdventureList = useAdventureStore((state) => state.loadAdventureList);
+  const hasInitialized = useRef(false);
 
   useEffect(() => {
+    // Prevent double initialization in development
+    if (hasInitialized.current) {
+      console.log('[App] Already initialized, skipping...');
+      return;
+    }
+    hasInitialized.current = true;
+
     async function initialize() {
       console.log('[App] Starting initialization...');
 

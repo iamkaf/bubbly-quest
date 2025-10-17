@@ -9,6 +9,8 @@
     "fs:default",
     "fs:allow-app-read-recursive",
     "fs:allow-app-write-recursive",
-    "window-state:default"
+    "window-state:default",
+    "log:allow-log",
+    "log:default"
   ]
 }

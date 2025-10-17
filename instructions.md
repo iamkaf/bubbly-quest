@@ -70,6 +70,39 @@ The application uses the **Tauri File System Plugin** for all file operations:
 * **Base Directories**: Uses `BaseDirectory.AppData` for scoped, secure file access
 * **Security**: Built-in path traversal protection and configurable permissions
 
+### 3.3. Logging System
+
+The application includes a comprehensive logging system that captures events from both Rust and JavaScript:
+
+**Configuration:**
+- Rust backend uses `tauri-plugin-log` with three targets:
+  - **LogDir**: Saves logs to `bubbly_quest.log` in the app's Local AppData directory
+  - **Stdout**: Console output for development
+  - **Webview**: Browser developer console
+- Frontend uses `@tauri-apps/plugin-log` with `attachConsole()` to capture all console statements
+
+**Log File Location:**
+- Windows: `C:\Users\{username}\AppData\Local\com.iamkaf.bubbly-quest\logs\bubbly_quest.log`
+- macOS: `~/Library/Logs/com.iamkaf.bubbly-quest/bubbly_quest.log`
+- Linux: `~/.local/share/com.iamkaf.bubbly-quest/logs/bubbly_quest.log`
+
+**Usage Examples:**
+```typescript
+// Frontend logging
+import { info, warn, error } from '@tauri-apps/plugin-log';
+
+info('Player entered new room');
+warn('Low health warning');
+error('Failed to save game');
+
+// Rust logging
+use log::{info, warn, error};
+
+info!("Application started");
+warn!("Deprecated feature used");
+error!("Failed to read file");
+```
+
 ## **4. Feature Specification**
 
 The project consists of two distinct applications: the **Game Player** and the **Adventure Editor**.

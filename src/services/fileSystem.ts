@@ -11,6 +11,7 @@ import {
   mkdir,
   BaseDirectory,
 } from '@tauri-apps/plugin-fs';
+import { info, warn, error } from '@tauri-apps/plugin-log';
 import type { Adventure, AdventureList, SaveGame } from '@/types';
 import { safeValidateAdventure, safeValidateAdventureList, safeValidateSaveGame } from '@/schemas';
 
@@ -68,12 +69,15 @@ function wrapError(error: FileSystemError): FileSystemResult<never> {
  */
 export async function ensureDirectoryStructure(): Promise<FileSystemResult<void>> {
   try {
+    info('Checking directory structure');
+
     // Check if adventures directory exists
     const adventuresExists = await exists(ADVENTURES_DIR, {
       baseDir: BaseDirectory.AppData,
     });
 
     if (!adventuresExists) {
+      info('Creating adventures directory structure');
       // Create adventures directory
       await mkdir(ADVENTURES_DIR, {
         baseDir: BaseDirectory.AppData,
@@ -85,10 +89,15 @@ export async function ensureDirectoryStructure(): Promise<FileSystemResult<void>
         baseDir: BaseDirectory.AppData,
         recursive: true,
       });
+
+      info('Directory structure created successfully');
+    } else {
+      info('Directory structure already exists');
     }
 
     return wrapResult(undefined);
   } catch (err) {
+    error(`Failed to create directory structure: ${err}`);
     return wrapError(createError('unknown', 'Failed to create directory structure', err));
   }
 }
@@ -101,6 +110,7 @@ export async function createAdventureDirectory(
 ): Promise<FileSystemResult<void>> {
   try {
     const adventurePath = `${ADVENTURES_DIR}/${adventureId}`;
+    info(`Creating adventure directory: ${adventureId}`);
 
     await mkdir(adventurePath, {
       baseDir: BaseDirectory.AppData,
@@ -112,8 +122,10 @@ export async function createAdventureDirectory(
       recursive: true,
     });
 
+    info(`Adventure directory created successfully: ${adventureId}`);
     return wrapResult(undefined);
   } catch (err) {
+    error(`Failed to create adventure directory: ${adventureId} - ${err}`);
     return wrapError(
       createError('unknown', `Failed to create adventure directory: ${adventureId}`, err),
     );
@@ -130,6 +142,7 @@ export async function createAdventureDirectory(
 export async function readAdventure(adventureId: string): Promise<FileSystemResult<Adventure>> {
   try {
     const path = `${ADVENTURES_DIR}/${adventureId}/${ADVENTURE_FILE}`;
+    info(`Reading adventure: ${adventureId}`);
 
     // Check if file exists
     const fileExists = await exists(path, {
@@ -137,6 +150,7 @@ export async function readAdventure(adventureId: string): Promise<FileSystemResu
     });
 
     if (!fileExists) {
+      warn(`Adventure not found: ${adventureId}`);
       return wrapError(createError('not_found', `Adventure not found: ${adventureId}`));
     }
 
@@ -150,6 +164,7 @@ export async function readAdventure(adventureId: string): Promise<FileSystemResu
     try {
       data = JSON.parse(content);
     } catch (parseErr) {
+      error(`Failed to parse adventure JSON: ${adventureId} - ${parseErr}`);
       return wrapError(
         createError('parse', `Failed to parse adventure JSON: ${adventureId}`, parseErr),
       );
@@ -160,13 +175,18 @@ export async function readAdventure(adventureId: string): Promise<FileSystemResu
     if (!validation.success) {
       console.error(`[FileSystem] Adventure validation failed for ${adventureId}:`);
       console.error(validation.error.format());
+      error(
+        `Adventure validation failed: ${adventureId} - ${validation.error.issues.map((i) => i.message).join(', ')}`,
+      );
       return wrapError(
         createError('validation', `Adventure validation failed: ${adventureId}`, validation.error),
       );
     }
 
+    info(`Adventure read successfully: ${adventureId}`);
     return wrapResult(validation.data);
   } catch (err) {
+    error(`Failed to read adventure: ${adventureId} - ${err}`);
     return wrapError(createError('unknown', `Failed to read adventure: ${adventureId}`, err));
   }
 }
@@ -181,6 +201,9 @@ export async function writeAdventure(adventure: Adventure): Promise<FileSystemRe
     if (!validation.success) {
       console.error('[FileSystem] Adventure validation failed before write:');
       console.error(validation.error.format());
+      error(
+        `Adventure validation failed before write - ${validation.error.issues.map((i) => i.message).join(', ')}`,
+      );
       return wrapError(
         createError('validation', 'Adventure validation failed before write', validation.error),
       );
@@ -188,6 +211,7 @@ export async function writeAdventure(adventure: Adventure): Promise<FileSystemRe
 
     const adventureId = adventure.metadata.id;
     const path = `${ADVENTURES_DIR}/${adventureId}/${ADVENTURE_FILE}`;
+    info(`Writing adventure: ${adventureId}`);
 
     // Ensure directory exists
     const dirResult = await createAdventureDirectory(adventureId);
@@ -200,8 +224,10 @@ export async function writeAdventure(adventure: Adventure): Promise<FileSystemRe
       baseDir: BaseDirectory.AppData,
     });
 
+    info(`Adventure written successfully: ${adventureId}`);
     return wrapResult(undefined);
   } catch (err) {
+    error(`Failed to write adventure: ${adventure.metadata.id} - ${err}`);
     return wrapError(
       createError('write', `Failed to write adventure: ${adventure.metadata.id}`, err),
     );
