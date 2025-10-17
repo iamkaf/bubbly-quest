@@ -90,7 +90,7 @@ The application includes a comprehensive logging system that captures events fro
 - Frontend uses `@tauri-apps/plugin-log` with `attachConsole()` to capture all console statements
 
 **Log File Location:**
-- Windows: `C:\Users\joaqu\AppData\Local\com.iamkaf.bubbly-quest\logs\bubbly_quest.log`
+- Windows: `C:\Users\{username}\AppData\Local\com.iamkaf.bubbly-quest\logs\bubbly_quest.log`
 - macOS: `~/Library/Logs/com.iamkaf.bubbly-quest/bubbly_quest.log`
 - Linux: `~/.local/share/com.iamkaf.bubbly-quest/logs/bubbly_quest.log`
 
